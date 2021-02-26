@@ -2,10 +2,11 @@ import tools
 import constants
 from pprint import pprint
 
-from ildar import gather_name_link_of_institutes, parse_ivmiit, parse_geogr
+from ildar import gather_name_link_of_institutes_and_branches, parse_ivmiit, parse_geogr
 from vasia import parse_higher_school_buisness
 from maks import parse_ipot
 from rama import parse_engineer
+from alsu import parse_chill
 
 
 def main():
@@ -41,7 +42,7 @@ def main():
         'Медико-санитарная часть ФГАОУ ВО КФУ': None,
         'Центр цифровых трансформаций': None,
         'Институт передовых образовательных технологий': parse_ipot,
-        'Набережночелнинский институт КФУ': None,
+        'Набережночелнинский институт КФУ': parse_chill,
         'Елабужский институт КФУ': None}
 
     data = {}
