@@ -14,25 +14,36 @@ def gather_name_link_of_cathedras_of_chill(link):
         lis = ul.find_all('li')
         for li in lis:
             a = li.find('a')
-            if a.text.startswith('Кафедра'):
-                cathedras.append((a.text, a.get('href')))
+            if a:
+                if a.text.startswith('кафедра'):
+                    cathedras.append((a.text, a.get('href')))
     return cathedras
-
 
 
 def parse_chill(link):
     struct_link = get_link_from_menu_list_left(link, 'Структура института')
 
     cathedras = gather_name_link_of_cathedras_of_chill(struct_link)
+    print(cathedras)
     result = {}
 
     for name, link in cathedras:
-        stuff_link = get_link_from_menu_list_left(link, 'Сотрудники и преподаватели')
+        stuff_link = None
+        try:
+            stuff_link = get_link_from_menu_list_left(link, 'Сотрудники и преподаватели')
+        except:
+            pass
         if not stuff_link:
-            stuff_link = get_link_from_menu_list_left(link, 'Преподаватели и сотрудники')
+            try:
+                stuff_link = get_link_from_menu_list_left(link, 'Преподаватели и сотрудники')
+            except:
+                pass
         result[name] = stuff_link
 
     for name, stuff_link in result.items():
-        result[name] = gather_name_link_of_employees(stuff_link)
+        try:
+            result[name] = gather_name_link_of_employees(stuff_link)
+        except:
+            pass
 
     return result
