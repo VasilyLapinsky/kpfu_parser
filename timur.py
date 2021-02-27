@@ -2,6 +2,23 @@ from bs4 import BeautifulSoup
 import tools
 import ildar
 
+
+
+def gather_name_link_of_cathedras_of_imo(link):
+    html = tools.get_html(link)
+    soup = BeautifulSoup(html, 'lxml')
+
+    div = soup.find('div', class_='visit_link')
+
+    links = div.find_all('a')
+
+    cathedras = []
+    for a in links:
+        if 'Кафедра' in a.text:
+            cathedras.append((a.text, a.get('href')))
+    return cathedras
+
+
 def gather_name_link_of_employees_imo(link):
     html = tools.get_html(link)
     soup = BeautifulSoup(html, 'lxml')
@@ -24,16 +41,17 @@ def gather_name_link_of_employees_imo(link):
                 employees.append((a.text, a.get('href')))
     else:
         div = soup.find('div', class_='visit_link')
-        ps = div.find('p')
-        for p in ps.contents:
-            if '<br/>' not in str(p):
-                employees.append((str(p)))
+        p = div.find('p')
+        for row in p.text.split('\r\n'):
+            print(row)
+            employees.append((row, None))
+        print(employees)
     return employees
 
 def parse_imo(link):
-    struct_buton_link = ildar.get_link_from_menu_list_left(link,'Структура')
+    struct_button_link = ildar.get_link_from_menu_list_left(link,'Структура')
 
-    cathedras = ildar.gather_name_link_of_cathedras_of_geogr(struct_buton_link)
+    cathedras = gather_name_link_of_cathedras_of_imo(struct_button_link)
     result = {}
 
     for name, link in cathedras:
@@ -56,17 +74,15 @@ def gather_name_link_of_cathedras_of_mehmat(link):
 
     uls = soup.find_all('ul', class_='menu_list')
 
-    lis = []
+    list_links = []
     for ul in uls:
-        lis += ul.find_all('li', class_='li_spec')
-    print(lis)
+        list_links.append(ul.find_all('a'))
+
     cathedras = []
-    for li in lis:
-        a = li.find('a')
-        print(a)
-        print('_______')
-        if a.text.startswith('Кафедpа'):
-            cathedras.append((a.text, a.get('href')))
+    for list in list_links:
+        for link in list:
+            if link.text.startswith('Кафедpа') or link.text.startswith('Кафедра') :
+                cathedras.append((link.text, link.get('href')))
     return cathedras
 
 
@@ -92,7 +108,7 @@ def gather_name_link_of_employees_mehmat(link):
             if a:
                 employees.append((a.text, a.get('href')))
     else:
-        tbody = soup.find_all('tbody')[1]
+        tbody = soup.find_all('tbody')[0]
         trs = tbody.find_all('tr')
         for tr in trs:
             td = tr.find('td')
@@ -104,20 +120,18 @@ def gather_name_link_of_employees_mehmat(link):
 
 
 def parse_mehmat(link):
-    struct_buton_link = ildar.get_link_from_menu_list_left(link,'Структура')
+    struct_button_link = ildar.get_link_from_menu_list_left(link,'Структура')
 
-    cathedras = gather_name_link_of_cathedras_of_mehmat(struct_buton_link)
+    cathedras = gather_name_link_of_cathedras_of_mehmat(struct_button_link)
     result = {}
-    print(cathedras)
     for name, link in cathedras:
         stuff_link1 = ildar.get_link_from_menu_list_left(link, 'Сотрудники')
-        stuff_link2 = ildar.get_link_from_menu_list_left(link, 'Сотрудники кафедры')
+        stuff_link2 = ildar.get_link_from_menu_list_left(link, 'Состав кафедры')
         if stuff_link1:
             result[name] = stuff_link1
-        if stuff_link2:
+        elif stuff_link2:
             result[name] = stuff_link2
-
     for name, stuff_link in result.items():
         result[name] = gather_name_link_of_employees_mehmat(stuff_link)
-    i = 1
+
     return result
