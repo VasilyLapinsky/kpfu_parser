@@ -9,7 +9,7 @@ from maks import parse_ipot
 from rama import parse_engineer
 from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
-from timur import parse_mehmat,parse_imo
+from timur import parse_mehmat, parse_imo
 from regina import parse_philology
 
 
