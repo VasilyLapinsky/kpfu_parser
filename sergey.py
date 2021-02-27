@@ -75,4 +75,3 @@ def parse_psychology(link):
             result[name] = gather_name_link_of_psychology_employee_engine(stuff_link)
 
     return result
-
