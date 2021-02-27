@@ -9,7 +9,9 @@ from maks import parse_ipot
 from rama import parse_engineer
 from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
+from timur import parse_mehmat,parse_imo
 from regina import parse_philology
+
 
 def main():
     html = tools.get_html(constants.initial_url)
@@ -20,7 +22,7 @@ def main():
     parsing_dictionary = {
         'Институт экологии и природопользования': parse_geogr,
         'Институт геологии и нефтегазовых технологий': None,
-        'Институт математики и механики им. Н.И. Лобачевского': None,
+        'Институт математики и механики им. Н.И. Лобачевского': parse_mehmat,
         'Институт физики': parse_phys,
         'Химический институт им. А.М. Бутлерова': parse_chem,
         'Юридический факультет': parse_law,
@@ -31,7 +33,7 @@ def main():
         'Институт информационных технологий и интеллектуальных систем': None,
         'Институт фундаментальной медицины и биологии': None,
         'Инженерный институт': parse_engineer,
-        'Институт международных отношений': None,
+        'Институт международных отношений': parse_imo,
         'Высшая школа бизнеса': parse_higher_school_buisness,
         'Институт социально-философских наук и массовых коммуникаций': None,
         'Институт управления, экономики и финансов': None,
@@ -56,7 +58,6 @@ def main():
 
     # pprint(data)
     create_vizualization(data)
-
 
 
 if __name__ == '__main__':
