@@ -24,7 +24,6 @@ def parse_chill(link):
     struct_link = get_link_from_menu_list_left(link, 'Структура института')
 
     cathedras = gather_name_link_of_cathedras_of_chill(struct_link)
-    print(cathedras)
     result = {}
 
     for name, link in cathedras:
