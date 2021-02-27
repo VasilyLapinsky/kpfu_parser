@@ -3,7 +3,7 @@ import constants
 from pprint import pprint
 
 from ildar import gather_name_link_of_institutes_and_branches, parse_ivmiit, parse_geogr, parse_physical
-from vasia import parse_higher_school_buisness, create_vizualization
+from vasia import parse_higher_school_buisness, create_visualization
 from sergey import parse_psychology
 from maks import parse_ipot
 from rama import parse_engineer
@@ -57,7 +57,7 @@ def main():
             data[name] = func(link)
 
     # pprint(data)
-    create_vizualization(data)
+    create_visualization(data)
 
 
 if __name__ == '__main__':
