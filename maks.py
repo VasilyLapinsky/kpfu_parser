@@ -81,17 +81,31 @@ def gather_name_link_of_cathedras_of_ipot(link):
     return cathedras
 
 
-def parse_ipot(link):
+def clear_parsing_info(res):  # clear from any symbols
+    bad_chars = [';', ':', '!', "*", ".", "\\", "/", "-", "\t", "\r", "\n", "\ufeff", "\xa0"]
+    ans = []
+
+    for current in res:
+        for char in bad_chars:
+            current = current.replace(char, "")
+        if current != "":
+            ans.append(current)
+    return ans
+
+
+def parse_ipot(link):  # main parse func
     struct_links = gather_name_link_of_cathedras_of_ipot(link)
 
     result = {}
 
     for name, link in struct_links:
         stuff_link = get_link_from_menu_list_left(link, 'Сотрудники')
-        if stuff_link:
+        if stuff_link != None:
             result[name] = stuff_link
 
     for name, stuff_link in result.items():
         result[name] = get_info_from_html(stuff_link)
+    for name, info in result.items():
+        result[name] = clear_parsing_info(info)
 
     return result

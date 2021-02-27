@@ -7,6 +7,7 @@ from vasia import parse_higher_school_buisness
 from maks import parse_ipot
 from rama import parse_engineer
 from alsu import parse_chill
+from ilsiyar import parse_phys, parse_law, parse_chem
 
 
 def main():
@@ -18,9 +19,9 @@ def main():
         'Институт экологии и природопользования': parse_geogr,
         'Институт геологии и нефтегазовых технологий': None,
         'Институт математики и механики им. Н.И. Лобачевского': None,
-        'Институт физики': None,
-        'Химический институт им. А.М. Бутлерова': None,
-        'Юридический факультет': None,
+        'Институт физики': parse_phys,
+        'Химический институт им. А.М. Бутлерова': parse_chem,
+        'Юридический факультет': parse_law,
         'Институт вычислительной математики и информационных технологий': parse_ivmiit,
         'Институт филологии и межкультурной коммуникации': None,
         'Институт психологии и образования': None,
