@@ -9,6 +9,7 @@ from maks import parse_ipot
 from rama import parse_engineer
 from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
+from regina import parse_philology
 
 
 def main():
@@ -25,7 +26,7 @@ def main():
         'Химический институт им. А.М. Бутлерова': parse_chem,
         'Юридический факультет': parse_law,
         'Институт вычислительной математики и информационных технологий': parse_ivmiit,
-        'Институт филологии и межкультурной коммуникации': None,
+        'Институт филологии и межкультурной коммуникации': parse_philology,
         'Институт психологии и образования': parse_psychology,
         'Общеуниверситетская кафедра физического воспитания и спорта': parse_physical,
         'Институт информационных технологий и интеллектуальных систем': None,
