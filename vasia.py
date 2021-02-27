@@ -55,6 +55,6 @@ def create_vizualization(data):
         cathedras = [cathedras_name for cathedras_name, counter in general_counter[institute].items()]
         cathedras_counter = [counter for cathedras_name, counter in general_counter[institute].items()]
         ax.pie(cathedras_counter, labels=cathedras,
-               autopct=lambda pct: f"{int(pct * sum(institutes_counter) / 100)}", shadow=False)
+               autopct=lambda pct: f"{int(pct * sum(cathedras_counter) / 100)}", shadow=False)
 
     plt.show()
