@@ -20,7 +20,6 @@ def gather_name_link_of_employees(link):
 
         spans = soup.find_all('span', class_='fio')
 
-
         for span in spans:
             a = span.find('a')
             if a:
@@ -34,6 +33,7 @@ def gather_name_link_of_employees(link):
                 if 'КФУ' != a.text and 'Институт' not in a.text:
                     employees.append((a.text, a.get('href')))
     return employees
+
 
 def gather_name_link_of_cathedras_of_school(link):
     html = tools.get_html(link)
@@ -80,13 +80,10 @@ def parse_philology(link):
         stuff_link = get_link_from_menu_list_left(link, 'Сотрудники')
         result[name] = stuff_link
 
-
     for name, stuff_link in result.items():
         result[name] = gather_name_link_of_employees(stuff_link)
 
     return result
-
-
 
 
 if __name__ == '__main__':
