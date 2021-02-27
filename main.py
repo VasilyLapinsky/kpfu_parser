@@ -11,6 +11,7 @@ from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
 from regina import parse_philology
 
+
 def main():
     html = tools.get_html(constants.initial_url)
     institutes = gather_name_link_of_institutes_and_branches(html)
@@ -56,7 +57,6 @@ def main():
 
     # pprint(data)
     create_vizualization(data)
-
 
 
 if __name__ == '__main__':
