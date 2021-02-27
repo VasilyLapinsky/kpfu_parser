@@ -3,11 +3,14 @@ import constants
 from pprint import pprint
 
 from ildar import gather_name_link_of_institutes_and_branches, parse_ivmiit, parse_geogr, parse_physical
-from vasia import parse_higher_school_buisness
+from vasia import parse_higher_school_buisness, create_vizualization
+from sergey import parse_psychology
 from maks import parse_ipot
 from rama import parse_engineer
+from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
 from timur import parse_mehmat,parse_imo
+from regina import parse_philology
 
 
 def main():
@@ -15,6 +18,7 @@ def main():
     institutes = gather_name_link_of_institutes_and_branches(html)
     print(f'институты: {institutes}')
     print(f'количество институтов: {len(institutes)}')
+
     parsing_dictionary = {
         'Институт экологии и природопользования': parse_geogr,
         'Институт геологии и нефтегазовых технологий': None,
@@ -23,8 +27,8 @@ def main():
         'Химический институт им. А.М. Бутлерова': parse_chem,
         'Юридический факультет': parse_law,
         'Институт вычислительной математики и информационных технологий': parse_ivmiit,
-        'Институт филологии и межкультурной коммуникации': None,
-        'Институт психологии и образования': None,
+        'Институт филологии и межкультурной коммуникации': parse_philology,
+        'Институт психологии и образования': parse_psychology,
         'Общеуниверситетская кафедра физического воспитания и спорта': parse_physical,
         'Институт информационных технологий и интеллектуальных систем': None,
         'Институт фундаментальной медицины и биологии': None,
@@ -43,7 +47,7 @@ def main():
         'Медико-санитарная часть ФГАОУ ВО КФУ': None,
         'Центр цифровых трансформаций': None,
         'Институт передовых образовательных технологий': parse_ipot,
-        'Набережночелнинский институт КФУ': None,
+        'Набережночелнинский институт КФУ': parse_chill,
         'Елабужский институт КФУ': None}
 
     data = {}
@@ -52,7 +56,8 @@ def main():
         if func:
             data[name] = func(link)
 
-    pprint(data)
+    # pprint(data)
+    create_vizualization(data)
 
 
 if __name__ == '__main__':
