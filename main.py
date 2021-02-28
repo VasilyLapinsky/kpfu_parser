@@ -11,7 +11,7 @@ from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
 from timur import parse_mehmat, parse_imo
 from regina import parse_philology
-
+from anton import parse_lobach_licey,parse_IT_licey
 
 def main():
     html = tools.get_html(constants.initial_url)
@@ -39,8 +39,8 @@ def main():
         'Институт управления, экономики и финансов': None,
         'Высшая школа государственного и муниципального управления': None,
         'Центр корпоративного обучения': None,
-        'IT-лицей-интернат КФУ': None,
-        'Лицей имени Н.И.Лобачевского': None,
+        'IT-лицей-интернат КФУ': parse_IT_licey,
+        'Лицей имени Н.И.Лобачевского': parse_lobach_licey,
         'Подготовительный факультет для иностранных учащихся': None,
         'Приволжский центр повышения квалификации и профессиональной переподготовки работников образования': None,
         'Центр непрерывного повышения профессионального мастерства педагогических работников': None,
