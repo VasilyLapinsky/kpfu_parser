@@ -23,8 +23,9 @@ def parse_IT_licey(link):
     info_prep_button_link = get_link_from_menu_list_left(info_button_link,
                                                          'Руководство. Педагогический (научно-педагогический) состав')
     employess = gather_name_link_of_employess_it_licey(info_prep_button_link)
-    result = {"Педагогический состав":employess}
+    result = {"Педагогический состав": employess}
     return result
+
 
 def gather_name_link_of_employess_licey_lobach(link):
     html = tools.get_html(link)

@@ -11,7 +11,8 @@ from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
 from timur import parse_mehmat, parse_imo
 from regina import parse_philology
-from anton import parse_lobach_licey,parse_IT_licey
+from anton import parse_lobach_licey, parse_IT_licey
+
 
 def main():
     html = tools.get_html(constants.initial_url)
