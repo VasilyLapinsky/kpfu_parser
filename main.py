@@ -3,14 +3,15 @@ import constants
 from pprint import pprint
 
 from ildar import gather_name_link_of_institutes_and_branches, parse_ivmiit, parse_geogr, parse_physical
-from vasia import parse_higher_school_buisness, create_vizualization
+from vasia import parse_higher_school_buisness, create_visualization
 from sergey import parse_psychology
 from maks import parse_ipot
 from rama import parse_engineer
 from alsu import parse_chill
 from ilsiyar import parse_phys, parse_law, parse_chem
-from timur import parse_mehmat,parse_imo
+from timur import parse_mehmat, parse_imo
 from regina import parse_philology
+from anton import parse_lobach_licey, parse_IT_licey
 
 
 def main():
@@ -39,8 +40,8 @@ def main():
         'Институт управления, экономики и финансов': None,
         'Высшая школа государственного и муниципального управления': None,
         'Центр корпоративного обучения': None,
-        'IT-лицей-интернат КФУ': None,
-        'Лицей имени Н.И.Лобачевского': None,
+        'IT-лицей-интернат КФУ': parse_IT_licey,
+        'Лицей имени Н.И.Лобачевского': parse_lobach_licey,
         'Подготовительный факультет для иностранных учащихся': None,
         'Приволжский центр повышения квалификации и профессиональной переподготовки работников образования': None,
         'Центр непрерывного повышения профессионального мастерства педагогических работников': None,
@@ -57,7 +58,7 @@ def main():
             data[name] = func(link)
 
     # pprint(data)
-    create_vizualization(data)
+    create_visualization(data)
 
 
 if __name__ == '__main__':

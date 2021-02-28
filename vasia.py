@@ -23,7 +23,7 @@ def parse_economics(link):
     return result
 
 
-def create_vizualization(data):
+def create_visualization(data):
     general_counter = {}
     for institute_name, cathedras in data.items():
         cathedra_counter = {}

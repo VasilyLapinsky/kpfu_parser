@@ -3,7 +3,6 @@ import tools
 import ildar
 
 
-
 def gather_name_link_of_cathedras_of_imo(link):
     html = tools.get_html(link)
     soup = BeautifulSoup(html, 'lxml')
@@ -43,13 +42,12 @@ def gather_name_link_of_employees_imo(link):
         div = soup.find('div', class_='visit_link')
         p = div.find('p')
         for row in p.text.split('\r\n'):
-            print(row)
             employees.append((row, None))
-        print(employees)
     return employees
 
+
 def parse_imo(link):
-    struct_button_link = ildar.get_link_from_menu_list_left(link,'Структура')
+    struct_button_link = ildar.get_link_from_menu_list_left(link, 'Структура')
 
     cathedras = gather_name_link_of_cathedras_of_imo(struct_button_link)
     result = {}
@@ -81,7 +79,7 @@ def gather_name_link_of_cathedras_of_mehmat(link):
     cathedras = []
     for list in list_links:
         for link in list:
-            if link.text.startswith('Кафедpа') or link.text.startswith('Кафедра') :
+            if link.text.startswith('Кафедpа') or link.text.startswith('Кафедра'):
                 cathedras.append((link.text, link.get('href')))
     return cathedras
 
@@ -95,7 +93,6 @@ def gather_name_link_of_employees_mehmat(link):
     iframe = soup.find('iframe')
     if iframe:
         outer_src = iframe.get('src')
-
 
         html = tools.get_html(outer_src)
         soup = BeautifulSoup(html, 'lxml')
@@ -120,7 +117,7 @@ def gather_name_link_of_employees_mehmat(link):
 
 
 def parse_mehmat(link):
-    struct_button_link = ildar.get_link_from_menu_list_left(link,'Структура')
+    struct_button_link = ildar.get_link_from_menu_list_left(link, 'Структура')
 
     cathedras = gather_name_link_of_cathedras_of_mehmat(struct_button_link)
     result = {}
