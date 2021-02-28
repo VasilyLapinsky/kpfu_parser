@@ -39,7 +39,7 @@ def create_visualization(data):
                           for institute_name, cathedras in general_counter.items()]
     # Создаем фигуру
     fig = plt.figure(constrained_layout=True)
-    fig.set_size_inches(20, 10 * ((len(institutes) + 1) // 2))
+    fig.set_size_inches(25, 10 * ((len(institutes) + 1) // 2))
     # Размечаем фигуру
     gs = GridSpec(2 + (len(institutes) + 1) // 2, 2, figure=fig)
 
